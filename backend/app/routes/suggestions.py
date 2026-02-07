@@ -7,15 +7,15 @@ import os
 router = APIRouter()
 
 # Load model data (CSV from notebook)
-# Try multiple paths to ensure it works locally and in production
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-CSV_PATH = os.path.join(BASE_DIR, "adpattern_final_production.csv")
+# In Railway: backend/adpattern_final_production.csv
+# In local dev: can be in backend/ or root
+BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))  # Points to backend/
+CSV_PATH = os.path.join(BACKEND_DIR, "adpattern_final_production.csv")
 
-# Fallback paths for different deployment scenarios
+# Fallback to root directory if not found in backend (for local dev)
 if not os.path.exists(CSV_PATH):
-    # Try relative to backend folder
-    CSV_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "../adpattern_final_production.csv")
-    CSV_PATH = os.path.abspath(CSV_PATH)
+    ROOT_DIR = os.path.dirname(BACKEND_DIR)
+    CSV_PATH = os.path.join(ROOT_DIR, "adpattern_final_production.csv")
 
 class SuggestionRequest(BaseModel):
     category: Optional[str] = "Clothing"
