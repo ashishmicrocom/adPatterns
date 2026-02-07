@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotate, faBullhorn, faEye } from "@fortawesome/free-solid-svg-icons";
 import toast, { Toaster } from 'react-hot-toast';
+import { API_ENDPOINTS } from "../../config/api";
 import CampaignMeta from "../CampaignMeta/CampaignMeta";
 import AdSetDetails from "../AdSetDetails/AdSetDetails";
 import AdCreative from "../AdCreative/AdCreative";
@@ -47,7 +48,7 @@ export default function CampaignReview() {
       } catch(e){}
 
       // Fetch fresh model data from backend
-      const response = await fetch('http://localhost:8000/api/generate-suggestions', {
+      const response = await fetch(API_ENDPOINTS.generateSuggestions, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -138,7 +139,7 @@ export default function CampaignReview() {
       toastId = toast.loading('Publishing campaign...');
 
       // First, create the campaign in the database
-      const createResponse = await fetch('http://localhost:8000/api/campaigns', {
+      const createResponse = await fetch(API_ENDPOINTS.campaigns, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -180,7 +181,7 @@ export default function CampaignReview() {
       const campaignId = createdCampaign.id || createdCampaign._id;
 
       // Then publish the campaign
-      const publishResponse = await fetch(`http://localhost:8000/api/campaigns/${campaignId}/publish`, {
+      const publishResponse = await fetch(`${API_ENDPOINTS.campaigns}/${campaignId}/publish`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

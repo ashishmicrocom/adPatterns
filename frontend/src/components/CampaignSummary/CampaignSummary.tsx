@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
+import { API_ENDPOINTS } from "../../config/api";
 import "./CampaignSummary.css";
 
 type Payload = { 
@@ -79,7 +80,7 @@ export default function CampaignSummary() {
   const fetchModelSuggestions = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/generate-suggestions', {
+      const response = await fetch(API_ENDPOINTS.generateSuggestions, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

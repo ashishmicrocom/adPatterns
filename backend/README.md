@@ -2,6 +2,18 @@
 
 FastAPI-based backend for AdPatterns advertising campaign management platform.
 
+## 🧠 Model Integration
+
+This backend integrates with a pre-trained ML model stored in `adpattern_final_production.csv` (located at repository root). The model provides AI-powered suggestions for ad campaigns:
+
+- **10,000+ pre-generated ad templates** with headlines, descriptions, keywords
+- **Multi-platform support:** Meta (Facebook/Instagram), Google Ads
+- **Smart filtering:** By category, demographics, and user preferences
+- **Real-time suggestions:** Instant results from CSV model data
+
+### Key Endpoint: `/api/generate-suggestions`
+Filters model data based on campaign parameters and returns relevant AI suggestions.
+
 ## Tech Stack
 
 - **Framework:** FastAPI
@@ -9,6 +21,7 @@ FastAPI-based backend for AdPatterns advertising campaign management platform.
 - **Authentication:** JWT (python-jose)
 - **Validation:** Pydantic v2
 - **Async Driver:** Motor (async MongoDB driver)
+- **Model Processing:** Pandas (CSV data filtering)
 
 ## Project Structure
 

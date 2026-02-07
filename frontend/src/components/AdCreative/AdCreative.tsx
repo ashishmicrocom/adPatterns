@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles, faPenToSquare, faRotate, faImage, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { API_ENDPOINTS } from "../../config/api";
 import "./AdCreative.css";
 
 type Props = { creative: any; onChange: (c:any)=>void };
@@ -41,7 +42,7 @@ export default function AdCreative({ creative, onChange }: Props) {
         selectedPlatform = localStorage.getItem('adpatterns_selected_platform') || 'Meta'; 
       } catch(e){}
 
-      const response = await fetch('http://localhost:8000/api/generate-suggestions', {
+      const response = await fetch(API_ENDPOINTS.generateSuggestions, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

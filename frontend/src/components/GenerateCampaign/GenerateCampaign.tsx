@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
+import { API_ENDPOINTS } from "../../config/api";
 import "./GenerateCampaign.css";
 
 type Draft = {
@@ -47,7 +48,7 @@ export default function GenerateCampaign() {
     // Fetch model suggestions from backend
     let modelData: any = null;
     try {
-      const response = await fetch('http://localhost:8000/api/generate-suggestions', {
+      const response = await fetch(API_ENDPOINTS.generateSuggestions, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

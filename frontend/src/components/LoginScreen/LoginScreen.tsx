@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { API_ENDPOINTS } from "../../config/api";
 import "./LoginScreen.css";
 
 type Props = {
@@ -57,7 +58,7 @@ export default function LoginScreen({ isOpen, onClose }: Props) {
     
     setSending(true);
     try {
-      const response = await fetch('http://localhost:8000/api/auth/login/json', {
+      const response = await fetch(API_ENDPOINTS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -101,7 +102,7 @@ export default function LoginScreen({ isOpen, onClose }: Props) {
     
     setSending(true);
     try {
-      const response = await fetch('http://localhost:8000/api/auth/register', {
+      const response = await fetch(API_ENDPOINTS.register, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

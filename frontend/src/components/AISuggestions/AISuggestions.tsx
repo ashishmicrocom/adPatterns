@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles, faTag, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { API_ENDPOINTS } from "../../config/api";
 import "./AISuggestions.css";
 
 type Props = {};
@@ -132,7 +133,7 @@ export default function AISuggestions(_: Props) {
       } catch (e) {}
 
       // Call backend API endpoint to get model data
-      const response = await fetch('http://localhost:8000/api/generate-suggestions', {
+      const response = await fetch(API_ENDPOINTS.generateSuggestions, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

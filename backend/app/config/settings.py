@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from typing import List
+import os
 
 
 class Settings(BaseSettings):
@@ -10,13 +11,13 @@ class Settings(BaseSettings):
     # Application Configuration
     app_name: str = "AdPatterns API"
     app_version: str = "1.0.0"
-    debug: bool = True
+    debug: bool = False
     host: str = "0.0.0.0"
-    port: int = 8000
+    port: int = int(os.getenv("PORT", "8000"))  # Use Railway's PORT or default to 8000
     
     # CORS Configuration
     frontend_url: str = "http://localhost:3000"
-    allowed_origins: str = "http://localhost:3000,http://localhost:3001"
+    allowed_origins: str = "http://localhost:3000,http://localhost:3001,https://*.vercel.app"
     
     # Security
     secret_key: str
